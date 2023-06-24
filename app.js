@@ -3,6 +3,7 @@ const express = require('express');
 const helmet = require('helmet');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const router = require('./routes');
@@ -16,11 +17,15 @@ app.use(cors());
 
 mongoose.set('strictQuery', true);
 mongoose.connect(Database)
-  .then(() => console.log('Database connected.'))
-  .catch((err) => console.error(err));
+  .then(() => {
+    console.log('Database connected.');
+  })
+  .catch((err) => {
+    console.error(err);
+  });
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(helmet());
 app.use(requestLogger);
 
@@ -36,4 +41,4 @@ app.use(errorLogger);
 app.use(errors());
 app.use(handleErrors);
 
-app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
+app.listen(PORT);
