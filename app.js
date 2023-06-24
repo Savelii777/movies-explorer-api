@@ -8,7 +8,7 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 const router = require('./routes');
 const handleErrors = require('./middlewares/handleErrors');
 const limiter = require('./middlewares/rateLimit');
-const { PORT, Database } = require('./utils/config.js');
+const { PORT, Database } = require('./utils/config');
 
 const app = express();
 
