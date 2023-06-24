@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const isURL = require('validator/lib/isURL');
 const { LINK_PATTERN_ERROR } = require('../utils/constants');
 
-// Определение схемы для модели "movie"
 const movieSchema = new mongoose.Schema({
   country: {
     type: String,
@@ -29,7 +28,12 @@ const movieSchema = new mongoose.Schema({
     required: true,
     validate: [isURL, LINK_PATTERN_ERROR],
   },
-  trailer: {
+  trailerLink: {
+    type: String,
+    required: true,
+    validate: [isURL, LINK_PATTERN_ERROR],
+  },
+  thumbnail: {
     type: String,
     required: true,
     validate: [isURL, LINK_PATTERN_ERROR],
@@ -53,5 +57,4 @@ const movieSchema = new mongoose.Schema({
   },
 });
 
-// Экспорт модели "movie"
 module.exports = mongoose.model('movie', movieSchema);
